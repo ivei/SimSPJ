@@ -8,6 +8,7 @@
 #include <QToolBox>
 #include <QListWidget>
 #include <QTableWidget>
+
 #include "mainwindow.h"
 #include "dbgutility.h"
 
@@ -16,17 +17,19 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
+    , _com(new SPJComm(this))
 {
     _initUi();
 }
 
 MainWindow::~MainWindow()
 {
+    delete _com;
 }
 
 void MainWindow::_initUi()
 {
-    this->resize(400,300);
+    this->resize(800,600);
     this->actAbout = new QAction("关于");
     // 初始化菜单
     QMenu *menuHelp = new QMenu(tr("帮助"));
@@ -37,15 +40,12 @@ void MainWindow::_initUi()
     QStatusBar *statusBar = new QStatusBar;
     this->setStatusBar(statusBar);
 
-    QWidget *central = new QWidget(this);
+    ScanPage *central = new ScanPage(this->_com, this);
     this->setCentralWidget(central);
 
-    QHBoxLayout *mainLayout = new QHBoxLayout(central);
-    QToolBox *toolBox = new QToolBox(this);
-    mainLayout->addWidget(toolBox);
-    QToolButton *btn1 = new QToolButton;
-    btn1->setDefaultAction(actAbout);
-    toolBox->addItem(btn1);
-    mainLayout->addWidget(new QTableWidget);
+
+
 }
+
+
 

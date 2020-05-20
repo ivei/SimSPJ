@@ -80,6 +80,7 @@ public:
 
     explicit SPJComm(QObject *parent = nullptr);
     ~SPJComm() override;
+    void setport(const QString& port_name);
     int open();
     void close();
     QSerialPort *getCom();
@@ -106,6 +107,7 @@ public:
     static QByteArray makeGetReply(quint8 status);
     static QByteArray makeReturnReply(quint8 status);
     static QByteArray makeReturnReply(quint8 status, const QByteArray &result=QByteArray());
+
 
 
     //QByteArray makeMsg(quint8 dir, quint8 cmd, quint8 state, const QByteArray& data);

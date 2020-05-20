@@ -29,12 +29,18 @@ SPJComm::~SPJComm()
         mSerial->close();
 }
 
+void SPJComm::setport(const QString &port_name)
+{
+    this->mSerial->setPortName(port_name);
+}
+
 int SPJComm::open()
 {
+
     emit debugInfo(tr("打开COM端口%1...").arg(mSerial->portName()), QByteArray());
     int ret = this->mSerial->open(QIODevice::ReadWrite);
     if( !ret){
-        throw QString("open com3 failed");
+        throw QString("open %1 failed").arg(mSerial->portName());
     }
     emit debugInfo(tr("打开COM端口%1成功").arg(mSerial->portName()), QByteArray());
     TRACE() << this->mSerial->portName() << "Opened";
@@ -228,6 +234,7 @@ void SPJComm::readData()
 void SPJComm::writeData(const QByteArray& data)
 {
     //TRACE() << "write data: " << data;
+    emit debugInfo(tr("发送数据"), data);
     this->mSerial->write(data);
 }
 
@@ -259,7 +266,7 @@ void SPJComm::_updateBuf(const QByteArray &buf)
 
 void SPJComm::_initCommSetting()
 {
-    this->mSerial->setPortName("COM5");
+    //this->mSerial->setPortName("COM5");
     this->mSerial->setBaudRate(QSerialPort::Baud57600);
     this->mSerial->setDataBits(QSerialPort::Data8);
     this->mSerial->setParity(QSerialPort::NoParity);

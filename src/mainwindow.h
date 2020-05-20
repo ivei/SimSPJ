@@ -3,8 +3,9 @@
 
 #include <QAction>
 #include <QMainWindow>
-#include <QTabWidget>
 
+#include "scanpage.h"
+#include "spjcomm.h"
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -18,8 +19,13 @@ public:
     ~MainWindow();
 private:
     void _initUi();
+    void _setupCentralWidget(QWidget *parent);
 
+
+    ScanPage* scanPage;
 
     QAction *actAbout;
+
+    SPJComm* _com;
 };
 #endif // MAINWINDOW_H

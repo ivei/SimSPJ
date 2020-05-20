@@ -18,14 +18,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/pmw.cpp \
+    src/scanpage.cpp \
     src/spjcomm.cpp \
     src/spjstatemachine.cpp
 
 HEADERS += \
     src/dbgutility.h \
     src/mainwindow.h \
-    src/pmw.h \
+    src/scanpage.h \
     src/spjcomm.h \
     src/spjstatemachine.h
 
@@ -35,4 +35,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    src/pmw.ui
+    src/scanpage.ui

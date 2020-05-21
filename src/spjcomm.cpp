@@ -172,7 +172,7 @@ void SPJComm::readData()
     // 从缓冲区读取数据
     QByteArray buf = this->mSerial->readAll();
     int rdsize = buf.size();
-    //TRACE() << "read new data: " << buf.toHex(' ') << "size is: " << rdsize;
+    TRACE() << "read new data: " << buf.toHex(' ') << "size is: " << rdsize;
     // 叠加到缓冲区去.
     int space =SPJ_RX_BUF+SPJ_RX_BUF_LEN-_rx_tail;
 
@@ -198,7 +198,7 @@ void SPJComm::readData()
            || *reinterpret_cast<quint16 *>(_rx_head + pmsg->len+1) != _calcCrc( &pmsg->len, pmsg->len-1 )
             )
         {
-            //qDebug() << "invalid message";
+            TRACE() << "invalid message" << QByteArray((const char*)(this->_rx_head), pmsg->len+3);
             this->_rx_head ++;
             continue;
         }

@@ -10,3 +10,13 @@ SPJState::SPJState(const QString &name)
 {
 
 }
+
+void SPJState::onEntry(QEvent *event)
+{
+
+}
+
+void SPJState::onExit(QEvent *event)
+{
+
+}

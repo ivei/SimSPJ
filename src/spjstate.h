@@ -12,6 +12,7 @@ public:
     void onExit(QEvent *event) override;
 private:
     QString _name;
+
 };
 
 #endif // SPJSTATE_H

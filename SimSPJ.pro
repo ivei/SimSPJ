@@ -18,8 +18,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/scanermachine.cpp \
     src/scanpage.cpp \
     src/spjcomm.cpp \
+    src/spjmachine.cpp \
     src/spjstate.cpp \
     src/spjstatemachine.cpp \
     src/spjtransaction.cpp \
@@ -28,8 +30,10 @@ SOURCES += \
 HEADERS += \
     src/dbgutility.h \
     src/mainwindow.h \
+    src/scanermachine.h \
     src/scanpage.h \
     src/spjcomm.h \
+    src/spjmachine.h \
     src/spjstate.h \
     src/spjstatemachine.h \
     src/spjtransaction.h \

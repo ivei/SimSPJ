@@ -88,7 +88,7 @@ bool CmdSigTransaction::eventTest(QEvent *event)
         return false;
     QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
     if( se->arguments().at(0).toInt() == this->_cmd ){
-        TRACE() << "match message" << this->_cmd;
+        //TRACE() << "match message" << this->_cmd;
         return true;
     }
     else {
@@ -97,16 +97,51 @@ bool CmdSigTransaction::eventTest(QEvent *event)
     }
 }
 
+#if 0
 void CmdSigTransaction::onTransition(QEvent *event)
 {
-    TRACE();
-    QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
-    TRACE() << "event: cmd= " << se->arguments().at(0).toInt();
+
+}
+#endif
+
+
+
+ReplySigTransaction::ReplySigTransaction(TestPage *sender, quint8 cmd, quint8 state)
+    : QSignalTransition(sender, &TestPage::sigReplyMsg)
+    , _cmd(cmd)
+    , _state(state)
+{
+
 }
 
+ReplySigTransaction::~ReplySigTransaction()
+{
 
+}
 
+bool ReplySigTransaction::eventTest(QEvent *event)
+{
+    if (!QSignalTransition::eventTest(event))
+        return false;
+    QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
 
+    if( se->arguments().at(0).toInt() == this->_cmd
+      &&se->arguments().at(1).toInt() == this->_state){
+        //TRACE() << "match message" << this->_cmd;
+        return true;
+    }
+    else {
+        TRACE() << "dismatch message" << se->arguments().at(2).toByteArray();
+        return false;
+    }
+}
+
+#if 0
+void ReplySigTransaction::onTransition(QEvent *event)
+{
+
+}
+#endif
 
 
 
@@ -138,12 +173,15 @@ void SPJSignalState::onEntry(QEvent *event)
     if(event->type() != QEvent::StateMachineSignal)
         return;
     QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
-    TRACE() << "Enter: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
+    TRACE() << "Enter State " << this->_name << " the msg is: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
 }
 
 void SPJSignalState::onExit(QEvent *event)
 {
     QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
-    TRACE() << "Exit: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
+    TRACE() << "Exit State " << this->_name << " the msg is: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
 
 }
+
+
+

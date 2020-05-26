@@ -20,6 +20,7 @@ SOURCES += \
     src/mainwindow.cpp \
     src/scanpage.cpp \
     src/spjcomm.cpp \
+    src/spjstate.cpp \
     src/spjstatemachine.cpp \
     src/spjtransaction.cpp \
     src/testpage.cpp
@@ -29,6 +30,7 @@ HEADERS += \
     src/mainwindow.h \
     src/scanpage.h \
     src/spjcomm.h \
+    src/spjstate.h \
     src/spjstatemachine.h \
     src/spjtransaction.h \
     src/testpage.h

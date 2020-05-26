@@ -66,8 +66,8 @@ void TestPage::on_postBtn2_clicked()
 
 void TestPage::on_startSigBtn_clicked()
 {
-    SPJSignalState  *s1 = new SPJSignalState();
-    SPJSignalState  *s2 = new SPJSignalState();
+    SPJSignalState  *s1 = new SPJSignalState("State 1");
+    SPJSignalState  *s2 = new SPJSignalState("State 2");
 
     CmdSigTransaction *t1 = new CmdSigTransaction(this, 1);
     CmdSigTransaction *t2 = new CmdSigTransaction(this, 2);
@@ -79,17 +79,17 @@ void TestPage::on_startSigBtn_clicked()
     s2->addTransition(t2);
 
     connect(s1, &QState::entered, [](){
-        TRACE() << "enter s1";
+        //TRACE() << "enter s1";
     });
     connect(s1, &QState::exited, [](){
-        TRACE() << "Leave s1";
+        //TRACE() << "Leave s1";
     });
 
     connect(s1, &QState::entered, [](){
-        TRACE() << "enter s1";
+        //TRACE() << "enter s1";
     });
     connect(s1, &QState::exited, [](){
-        TRACE() << "Leave s1";
+        //TRACE() << "Leave s1";
     });
 
     this->eventMachine->addState(s1);

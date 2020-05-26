@@ -10,6 +10,9 @@
 
 class TestPage;
 
+/**
+ * @brief 基于QEvent的Transaction, 不再使用了.
+ */
 struct CmdMsgEvent : public QEvent
 {
     CmdMsgEvent(quint8 cmd, const QByteArray& body)
@@ -73,7 +76,7 @@ public:
     ~CmdSigTransaction() override;
 protected:
     bool eventTest(QEvent *event) override;
-    void onTransition(QEvent *event) override;
+    //void onTransition(QEvent *event) override;
 private:
     quint8      _cmd;
 
@@ -81,7 +84,16 @@ private:
 
 class ReplySigTransaction : public QSignalTransition
 {
-
+    Q_OBJECT
+public:
+    ReplySigTransaction(TestPage *sender, quint8 cmd, quint8 state);
+    ~ReplySigTransaction() override;
+protected:
+    bool eventTest(QEvent *event) override;
+    //void onTransition(QEvent *event) override;
+private:
+    quint8      _cmd;
+    quint8      _state;
 };
 
 
@@ -106,11 +118,16 @@ class SPJSignalState : public QState
 {
     Q_OBJECT
 public:
-    SPJSignalState(){}
+    SPJSignalState(const QString& name=QString("noname"))
+        : _name(name)
+    {}
     ~SPJSignalState() override{}
 protected:
     void onEntry(QEvent *event) override;
     void onExit(QEvent *event) override;
+private:
+    QString _name;
+
 };
 
 #endif // CMDTRANSACTION_H

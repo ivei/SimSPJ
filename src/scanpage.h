@@ -31,6 +31,8 @@ private slots:
 
     void onDebugInfo(const QString& info, const QByteArray& data);
 
+    void on_closeBtn_triggered(QAction *arg1);
+
 private:
     void fillPortInfo();
     void setButtonEnables(bool enable);

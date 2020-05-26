@@ -142,3 +142,8 @@ void ScanPage::onDebugInfo(const QString &info, const QByteArray &data)
     ui->console->addItem(str);
 
 }
+
+void ScanPage::on_closeBtn_triggered(QAction *arg1)
+{
+
+}

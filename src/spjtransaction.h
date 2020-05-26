@@ -7,6 +7,7 @@
 #include <QEvent>
 #include <QState>
 #include <QStateMachine>
+#include <QTimer>
 
 class TestPage;
 
@@ -120,14 +121,17 @@ class SPJSignalState : public QState
 public:
     SPJSignalState(const QString& name=QString("noname"))
         : _name(name)
+        , _timer(new QTimer(this))
     {}
     ~SPJSignalState() override{}
+    QTimer  *_timer;
+signals:
+    //void timeout();
 protected:
     void onEntry(QEvent *event) override;
     void onExit(QEvent *event) override;
 private:
     QString _name;
-
 };
 
 #endif // CMDTRANSACTION_H

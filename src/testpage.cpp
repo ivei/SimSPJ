@@ -78,6 +78,11 @@ void TestPage::on_startSigBtn_clicked()
     t2->setTargetState(s1);
     s2->addTransition(t2);
 
+    //s1->addTransition(s1, &SPJSignalState::timeout, s2);
+    //s2->addTransition(s2, &SPJSignalState::timeout, s1);
+    s1->addTransition(s1->_timer, &QTimer::timeout, s2);
+    s2->addTransition(s2->_timer, &QTimer::timeout, s1);
+
     connect(s1, &QState::entered, [](){
         //TRACE() << "enter s1";
     });

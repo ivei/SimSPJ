@@ -84,9 +84,15 @@ CmdSigTransaction::~CmdSigTransaction()
 
 bool CmdSigTransaction::eventTest(QEvent *event)
 {
-    if (!QSignalTransition::eventTest(event))
+    if (!QSignalTransition::eventTest(event)){
         return false;
+    }
+
     QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
+    if( se->arguments().size() == 0){
+        TRACE() << "no arguments";
+        return false;
+    }
     if( se->arguments().at(0).toInt() == this->_cmd ){
         //TRACE() << "match message" << this->_cmd;
         return true;
@@ -172,15 +178,28 @@ void SPJSignalState::onEntry(QEvent *event)
 {
     if(event->type() != QEvent::StateMachineSignal)
         return;
+    TRACE() << "event type is: " << event->type();
     QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
-    TRACE() << "Enter State " << this->_name << " the msg is: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
+
+    TRACE() << "Enter State " << this->_name; // << " the msg is: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
+    this->_timer->setSingleShot(true);
+    //this->_timer->setInterval(5000);
+//    this->_timer->callOnTimeout([this](){
+//        TRACE() << "timeout";
+//        emit timeout();
+//    });
+    this->_timer->start(2000);
+
+
 }
 
 void SPJSignalState::onExit(QEvent *event)
 {
     QStateMachine::SignalEvent *se = static_cast<QStateMachine::SignalEvent*>(event);
-    TRACE() << "Exit State " << this->_name << " the msg is: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
+    //TRACE() << "Exit State " << this->_name << " the msg is: " << se->arguments().at(0).toInt() << se->arguments().at(1).toByteArray();
+    TRACE() << "Exit State" << this->_name;
 
+    this->_timer->stop();
 }
 
 

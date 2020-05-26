@@ -5,7 +5,9 @@
 #include <QMainWindow>
 
 #include "scanpage.h"
+#include "testpage.h"
 #include "spjcomm.h"
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -23,6 +25,7 @@ private:
 
 
     ScanPage* scanPage;
+    TestPage* testPage;
 
     QAction *actAbout;
 

@@ -40,7 +40,8 @@ void MainWindow::_initUi()
     QStatusBar *statusBar = new QStatusBar;
     this->setStatusBar(statusBar);
 
-    ScanPage *central = new ScanPage(this->_com, this);
+    //ScanPage *central = new ScanPage(this->_com, this);
+    TestPage *central = new TestPage();
     this->setCentralWidget(central);
 
 

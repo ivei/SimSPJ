@@ -20,14 +20,18 @@ SOURCES += \
     src/mainwindow.cpp \
     src/scanpage.cpp \
     src/spjcomm.cpp \
-    src/spjstatemachine.cpp
+    src/spjstatemachine.cpp \
+    src/spjtransaction.cpp \
+    src/testpage.cpp
 
 HEADERS += \
     src/dbgutility.h \
     src/mainwindow.h \
     src/scanpage.h \
     src/spjcomm.h \
-    src/spjstatemachine.h
+    src/spjstatemachine.h \
+    src/spjtransaction.h \
+    src/testpage.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -35,4 +39,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    src/scanpage.ui
+    src/scanpage.ui \
+    src/testpage.ui
